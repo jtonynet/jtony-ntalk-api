@@ -1,10 +1,10 @@
 module.exports = {
-	database: "jtony_ntask_api",
-	username:"postgres",
-	password:"postgres",
+	database: process.env.DATABASE_NAME || "jtony_ntask_api",
+	username: process.env.DATABASE_USER || "postgres",
+	password: process.env.DATABASE_PWD  || "postgres",
 	params: {
 		dialect: "postgres",
-		storage: "postgresql://localhost:5432",
+		storage: process.env.DATABASE_STORAGE || "postgresql://localhost:5432",
 		define: {
 			underscored: true
 		}
