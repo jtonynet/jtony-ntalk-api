@@ -8,7 +8,7 @@ module.exports = app => {
 		})
 		.get((req, res) => {
 			Tasks.findAll({})
-				.then(result => res.json(result))
+				.then(result => res.json({resultado: result}))
 				.catch(error => {
 					res.status(412).json({msg: error.message});
 				});
