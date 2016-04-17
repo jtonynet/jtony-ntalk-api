@@ -14,6 +14,7 @@ module.exports = app => {
 				});
 		})
 		.post((req, res) => {
+			console.log(req);
 			Tasks.create(req.body)
 					.then(result => res.json(result))
 					.catch(error => {
