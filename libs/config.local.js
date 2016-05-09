@@ -1,3 +1,5 @@
+import logger from "./logger.js";
+
 module.exports = {
 	database: "jtony_ntask_api",
 	username: "postgres",
@@ -7,6 +9,9 @@ module.exports = {
 		protocol:"postgres",
 		port: "5432",
 		host: "localhost",
+		logging: (sql) => {
+			logger.info("["+(new Date())+"] "+sql);
+		},
 		define: {
 			underscored: true
 		}
