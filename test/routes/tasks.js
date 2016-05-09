@@ -29,7 +29,7 @@ describe("Routes: Tasks", () => {
 						user_id: user.id
 					}]))
 					.then(tasks => {
-						fakeTask => tasks[0];
+						fakeTask = tasks[0];
 						token = jwt.encode({id: user.id}, jwtSecret);
 						done();
 					});
@@ -68,27 +68,40 @@ describe("Routes: Tasks", () => {
 		});
 	});
 
-/*
 	describe("GET /tasks/:id", () => {
 		describe("status 200", () => {
-			it("retunrs one task", done => {
-				//test code
+			it("retunrs one task", done => {	
+				request.get("/tasks/"+fakeTask.id)
+					.set("Authorization", "JWT "+token)
+					.expect(200)
+					.end((err, res) => {
+						expect(res.body.title).to.eql("Work");
+						done(err);
+					})
 			});
 		});
-
+			
 		describe("status 404", () => {
 			it("throws error when task not exist", done => {
-				//tests code
+				request.get("/tasks/0")
+					.set("Authorization", "JWT "+token)
+					.expect(404)
+					.end((err, res) => {done(err)});
 			});
 		});
 	});
-*/
 
-	/*
 	describe("PUT /tasks/:id", () => {
 		describe("status 204", () => {
 			it("updates a task", done => {
-				//test code
+				request.put("/tasks/"+fakeTask.id)
+					.set("Authorization", "JWT "+token)
+					.send({
+						title: "Travel",
+						done: true
+					})
+					.expect(204)
+					.end((err, res) => done(err));
 			});
 		});
 	});
@@ -96,9 +109,11 @@ describe("Routes: Tasks", () => {
 	describe("DELETE /tasks/:id", () => {
 		describe("status 204", () => {
 			it("removes a task", done => {
-				//test code
+				request.delete("/tasks/"+fakeTask.id)
+					.set("Authorization", "JWT "+token)
+					.expect(204)
+					.end((err, res) => done(err));
 			});
 		});
 	});
-	*/
 });
