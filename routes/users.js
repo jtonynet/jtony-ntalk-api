@@ -18,15 +18,17 @@ module.exports = app => {
 				})
 				.then(result => res.sendStatus(204))
 				.catch(error => {
-					res.status(412).sendStatus({msg: error.message});
+					res.status(412).json({msg: error.message});
 				});
 		});
 
 	app.post("/users", (req, res) => {
+		console.log('entrei');
+		console.log(req.body);
 		Users.create(req.body)
 			.then(result => res.json(result))
 			.catch(error => {
-				res.status(412).sendStatus({msg: error.message});
+				res.status(412).json({msg: error.message});
 			});
 	});
 }
