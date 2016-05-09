@@ -1,22 +1,22 @@
 describe("Routes: Token", () => {
 	const Users = app.db.models.Users;
 
+	/**/
 	describe("POST /token", () => {
-		before(done => {
-			//pre test code
-			Users
+		beforeEach(done => {
+			return Users
 				.destroy({where: {}})
 				.then(() => Users.create({
 					name: "John",
 					email: "john@email.net",
+
 					password: "12345"
 				}))
 				.then(done());
-		});	
-
+		});
+		
 		describe("status 200", () => {
 			it("returns authenticated user token", done => {
-				//test code
 				request.post("/token")
 					.send({
 						email: "john@email.net",
@@ -31,8 +31,18 @@ describe("Routes: Token", () => {
 		});
 
 		describe("status 401", () => {
+			it("throws error when password are incorrect", done => {
+				request.post("/token")
+					.send({
+						email: "john@email.net",
+						password: "WRONG_PASSWORD"
+					})
+					.expect(401)
+					.end((err, res) => {
+						done(err);
+					});
+			});
 			it("throws error when email not exist", done => {
-				//mail error code
 				request.post("/token")
 					.send({
 						email: "WRONG_EMAIL",
@@ -44,7 +54,6 @@ describe("Routes: Token", () => {
 					});
 			});
 			it("throws error when email and password are blank", done => {
-				//mail and pass error code
 				request.post("/token")
 					.expect(401)
 					.end((err, res) => {
@@ -52,5 +61,7 @@ describe("Routes: Token", () => {
 					})
 			});
 		});
+
 	});
+	/**/
 });

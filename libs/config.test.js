@@ -1,5 +1,5 @@
 module.exports = {
-	database: "jtony_ntask_api",
+	database: "jtony_ntask_api_TEST",
 	username: "postgres",
 	password: "postgres",
 	params: {
@@ -12,5 +12,5 @@ module.exports = {
 		}
 	},
 	jwtSecret: "12ntask_local34",
-	jwt: {session: false}
+	jwtSession: {session: false}
 };

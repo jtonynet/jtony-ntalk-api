@@ -12,5 +12,5 @@ module.exports = {
 		}
 	},
 	jwtSecret: process.env.DATABASE_JWT_SECRET,
-	jwt: {session: false}
+	jwtSession: {session: false}
 };

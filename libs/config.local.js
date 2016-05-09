@@ -12,5 +12,5 @@ module.exports = {
 		}
 	},
 	jwtSecret: "12ntask_local34",
-	jwt: {session: false}
+	jwtSession: {session: false}
 };

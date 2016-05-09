@@ -4,32 +4,14 @@ import {ExtractJwt} from "passport-jwt";
 
 module.exports = app => {
 	const cfg = app.libs.config;
-
-	passport.use(new Strategy({jwtFromRequest: ExtractJwt.fromAuthHeader(), secretOrKey: cfg.jwtSecret},
-		(payload, done) => {
-			User.findOne({id: payload.id})
-				.then(user => {
-					if(user) {
-						return done(null, {
-							id: user.id,
-							email: user.email
-						});
-					}
-					return done(null, false);
-				})
-				.catch(error => done(error, null));
-		})
-	);
-
-	/*
 	const Users = app.db.models.Users;
-	const cfg = app.libs.config;
+	const params = {
+		jwtFromRequest: ExtractJwt.fromAuthHeader(),
+		secretOrKey: cfg.jwtSecret
+	};
 
-	console.log(Strategy.jwtFromRequest);
-
-	const strategy = new Strategy({jwtFromRequest:()=>{}, secretOrKey: cfg.jwtSecret},
-		(payload, done) => {
-			Users.findById({id: payload.id})
+	const strategy = new Strategy(params, (payload, done) => {
+			Users.findOne({id: payload.id})
 				.then(user => {
 					if(user) {
 						return done(null, {
@@ -40,11 +22,9 @@ module.exports = app => {
 					return done(null, false);
 				})
 				.catch(error => done(error, null));
-		}
-	);
+		});
 
 	passport.use(strategy);
-	*/
 
 	return {
 		initialize: () => {
@@ -54,5 +34,5 @@ module.exports = app => {
 			return passport.authenticate("jwt", cfg.jwtSession);
 		}
 	};
-
+	
 };
