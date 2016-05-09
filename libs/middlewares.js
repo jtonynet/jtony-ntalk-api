@@ -1,4 +1,5 @@
-import bodyParser from "body-parser"; //TODO: DEPRECATED, review this.
+import bodyParser from "body-parser";
+import express from "express";
 
 module.exports = app => {
 	app.set("port", (process.env.PORT || 3000));
@@ -6,9 +7,9 @@ module.exports = app => {
 
 	app.use(bodyParser.json());
 	app.use(app.auth.initialize());	
-	
 	app.use((req, res, next) => {
 		delete req.body.id;
 		next();
-	})
+	});
+	app.use(express.static("public"));
 }
