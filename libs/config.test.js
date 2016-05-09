@@ -1,15 +1,16 @@
 module.exports = {
-	database: "jtony_ntask_api",
-	username: "",
-	password: "",
+	database: "jtony_ntask_api_TEST",
+	username: "postgres",
+	password: "postgres",
 	params: {
-		dialect: "sqlite",
-		protocol:"sqlite",
-		storage: "ntask.sqlite",
+		dialect: "postgres",
+		protocol:"postgres",
+		port: "5432",
+		host: "localhost",
 		define: {
 			underscored: true
 		}
 	},
-	jwtSecret: "12natsk_test34",
-	jwt: {session: false}
+	jwtSecret: "12ntask_local34",
+	jwtSession: {session: false}
 };

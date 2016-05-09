@@ -21,6 +21,13 @@ module.exports = (sequelize, DataType) => {
 			validate: {
 				notEmpty: true
 			}
+		},
+		password: {
+			type: DataType.STRING,
+			allowNull: false,
+			validate: {
+			notEmpty: true
+			}			
 		}
 	}, {
 		hooks: {
@@ -35,6 +42,7 @@ module.exports = (sequelize, DataType) => {
 			},
 			isPassword: (encodedPassword, password) => {
 				return bcrypt.compareSync(password, encodedPassword);
+				//return true;
 			}
 		}
 	});
