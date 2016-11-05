@@ -19,7 +19,7 @@ module.exports = app => {
 	}));
 	app.use(helmet());
 	app.use(cors({
-		origin: ["http://jtony-ntask-web.com/", "https://jtony-ntask-web.herokuapp.com"],
+		origin: ["http://jtony-ntask-web.com", "https://jtony-ntask-web.herokuapp.com"],
 		methods: ["GET", "POST", "PUT", "DELETE"],
 		allowedHeaders: ["Content-Type", "Authorization"]
 	}));
